@@ -1,5 +1,4 @@
-#This is a script for generating strong random passwords
-#Length of generated password is 8 characters
+# Generating strong random passwords of length 8 characters
 
 import random
 
@@ -7,18 +6,15 @@ alphabets = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n
 punc = ['!', '@', '_', '#', '&']
 digits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 
-random.shuffle(alphabets)
-random.shuffle(punc)
-random.shuffle(digits)
+def generate_passwds(n=1):
+    passwds = []
 
-print('{}{}{}{}'.format(''.join(alphabets[:2]), ''.join(alphabets[-2:]).upper(), ''.join(digits[:3]), punc[0]))
+    for i in range(n):
+        random.shuffle(alphabets); random.shuffle(punc); random.shuffle(digits)
+        passwds.append('{}{}{}{}'.format(''.join(alphabets[:2]), ''.join(alphabets[-2:]).upper(),
+                       ''.join(digits[:3]), punc[0]))
 
-'''
-#This is if the user wants to generate several passwords to choose from...
+    return passwds
 
-for i in range(5):
-    random.shuffle(alphabets)
-    random.shuffle(characters)
-    random.shuffle(digits)
-    print('{}{}{}{}'.format(''.join(alphabets[:2]), ''.join(alphabets[-2:]).upper(), ''.join(digits[:3]), characters[0]))
-'''
+
+print(generate_passwds(3))

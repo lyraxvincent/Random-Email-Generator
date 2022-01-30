@@ -1,20 +1,17 @@
 import numpy as np
+import io
 
-names_list = []
-with open('/home/lyrax/Documents/names.txt') as txt: #path of text file containing random names
-    for name in txt:
-        names_list.append(name)
+names_list = io.open("names.txt", "r").readlines()
 
-arr_lst = np.array(names_list) #array list of names
+def generate_emails(names=[]):
 
-new_lst = []
-for i in arr_lst:
-    i = i.split('\n')[0]  #cleaning the names in the array list
-    new_lst.append(i)
+    email_list = []
 
-email_list = []
-for j in new_lst:
-    j = j + '{}{}'.format(np.random.randint(1,99), '@gmail.com') #general format of email address
-    email_list.append(j)
+    for nm in names:
+        email_list.append(
+            nm.strip().split('\n')[0] + '{}{}'.format(np.random.randint(1, 99), '@gmail.com')
+        )
 
-np.savetxt('/home/lyrax/Documents/emails.txt', email_list, fmt='%s') #path to save the generated email list
+    return email_list
+
+print(generate_emails(names_list))
